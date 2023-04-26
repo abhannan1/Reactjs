@@ -1,0 +1,38 @@
+#### Suspense API
+
+The Suspense API is a feature in React that allows you to manage
+the loading state of your components. It provides a way to
+"suspend" rendering of a component until some data has been
+fetched, and display a fallback UI in the meantime. This makes it
+easier to handle asynchronous data loading and provide a smooth
+user experience in your React application.
+
+The data that is not often used by the users is not efficient to load with every render as well
+
+The landing page is used most often but contact page is not 
+so code splitting will only load the needed data and rest will be loaded only when needed 
+
+### important
+
+even if we set the logic with the toggle button to show that less often used component only when toggle button hits it still loads the js of that component even if toggle is off
+
+### so use Suspense API
+
+### import the component dynamically
+
+const ComponentName = lazy(()=>import('./ComponentDirectory'))
+
+then wrap the component in suspense
+
+<Suspense fallback={"show something while component is loading"}>
+Component
+</Suspense>
+
+You can wrap the complete return in suspense so that multiple components can lazy load
+
+return (
+<Suspense fallback={<h4>Loading...</h4>>>
+{/* rest of the logic */}
+<section> {show && <SlowComponent />}</section>
+</Suspense>
+);
